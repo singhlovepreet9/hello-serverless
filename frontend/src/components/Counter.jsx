@@ -11,7 +11,8 @@ class Counter extends Component {
     await axios
       .get("https://pqswkk8tdg.execute-api.us-east-1.amazonaws.com/dev/hello")
       .then(res => {
-        this.setState({ message: res.message });
+        console.log(res);
+        this.setState({ message: res.data.message });
       });
   };
   increment = () => {
