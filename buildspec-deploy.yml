@@ -10,7 +10,7 @@ phases:
     runtime-versions:
       nodejs: 8
     commands:
-      - echo Installing Serverless...
+      - echo Installing Serverlesss...
       - echo env $CODEBUILD_WEBHOOK_TRIGGER $CODEBUILD_WEBHOOK_HEAD_REF $CODEBUILD_SOURCE_VERSION
       - npm install -g serverless
   pre_build:
