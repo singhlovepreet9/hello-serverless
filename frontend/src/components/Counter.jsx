@@ -8,9 +8,11 @@ class Counter extends Component {
     message: ""
   };
   componentWillMount = async () => {
-    await axios.get("http://localhost:3000/hello").then(res => {
-      this.setState({ message: res.data.message });
-    });
+    await axios
+      .get("https://pqswkk8tdg.execute-api.us-east-1.amazonaws.com/dev/hello")
+      .then(res => {
+        this.setState({ message: res.data.message });
+      });
   };
   increment = () => {
     this.props.dispatch({ type: "INCREMENT" });
