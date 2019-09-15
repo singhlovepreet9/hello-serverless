@@ -1,0 +1,9 @@
+hello:
+  handler: handler.hello
+  environment:
+    AWS_ENV: ${ssm:/CodeBuild/AwsAccessKey~true}
+  events:
+    - http:
+        path: hello
+        method: get
+        cors: true
