@@ -27,7 +27,8 @@ phases:
       - echo frontend build started
       - cd ../frontend && npm run build
   post_build:
-    commands: -echo deploying frontend
+    commands:
+      - echo deploying frontend
       - aws s3 sync --acl public-read ./build s3://cicd-dev-env
       - echo deployment completed on `date`
 cache:
