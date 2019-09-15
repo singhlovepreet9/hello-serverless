@@ -29,7 +29,7 @@ class Counter extends Component {
   render() {
     return (
       <div style={{ align: "center" }}>
-        Hello Serverless {this.state.message}
+        Hello Serverless - {this.state.message}
         <div>
           <Button varaint="outlined" onClick={this.decrement} color="secondary">
             -
