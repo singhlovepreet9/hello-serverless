@@ -29,7 +29,7 @@ phases:
   post_build:
     commands:
       - echo deploying frontend
-      - aws s3 sync --acl public-read ./build s3://cicd-dev-env
+      - aws s3 sync --acl public-read ./build s3://cicd-demo-sls
       - echo deployment completed on `date`
 cache:
   paths:
