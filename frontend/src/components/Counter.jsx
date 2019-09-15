@@ -8,13 +8,9 @@ class Counter extends Component {
     message: ""
   };
   componentWillMount = async () => {
-    await axios
-      .get(
-        "https://o2ui13lnzc.execute-api.us-east-1.amazonaws.com/test/greet/Falcon?lang=en"
-      )
-      .then(res => {
-        this.setState({ message: res.data.message });
-      });
+    await axios.get("http://localhost:3000/hello").then(res => {
+      this.setState({ message: res.data.message });
+    });
   };
   increment = () => {
     this.props.dispatch({ type: "INCREMENT" });
@@ -30,7 +26,7 @@ class Counter extends Component {
   render() {
     return (
       <div style={{ align: "center" }}>
-        sab merge Serverless {this.state.message}
+        Hello Serverless {this.state.message}
         <div>
           <Button varaint="outlined" onClick={this.decrement} color="secondary">
             -

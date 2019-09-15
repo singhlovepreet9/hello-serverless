@@ -1,0 +1,38 @@
+version: 0.2
+env:
+  parameter-store:
+    AWS_ACCESS_KEY_ID: /CodeBuild/AwsAccessKey
+    AWS_SECRET_ACCESS_KEY: /CodeBuild/AwsSecretAccessKey
+    AWS_DEFAULT_REGION: /CodeBuild/AwsDefaultRegion
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 8
+    commands:
+      - echo Installing Serverless...
+      - echo env $CODEBUILD_WEBHOOK_TRIGGER $CODEBUILD_WEBHOOK_HEAD_REF $CODEBUILD_SOURCE_VERSION
+      - npm install -g serverless
+  pre_build:
+    commands:
+      - echo Installing frontend NPM dependencies...
+      - cd frontend && npm install
+      - echo installing backend dependencies
+      - cd ../backend && npm install
+  build:
+    commands:
+      - echo Deployment started on `date`
+      - echo Deploying with Serverless Framework
+      - sls deploy
+      - echo frontend build started
+      - cd ../frontend && npm run build
+  post_build:
+    commands: -echo deploying frontend
+      - aws s3 sync --acl public-read ./build s3://cicd-prod-env
+      - echo deployment completed on `date`
+
+cache:
+  paths:
+    - "frontend/node_modules/**/*"
+    - "backend/node_modules/**/*"
+    - "backend/.serverless"
